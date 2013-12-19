@@ -6,7 +6,11 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context=".MainMenuActivity" >
+    tools:context=".MainMenuActivity" 
+    
+    android:background="#000000"
+    >
+    
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -26,25 +30,34 @@
             android:id="@+id/button1"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:text="Voir la Carte" />
+            android:text="Voir la Carte"
+            android:textColor="#FFFFFF"
+            android:background="#111111"/>
 
         <Button
             android:id="@+id/button2"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:text="Configurer le service" />
+            android:text="Configurer le service"
+            android:textColor="#FFFFFF"
+            android:background="#111111" />
 
         <Button
             android:id="@+id/button3"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:text="Mode Hors ligne" />
+            android:text="Mode Hors ligne"
+            android:textColor="#FFFFFF"
+            android:background="#111111" />
 
         <Button
             android:id="@+id/button4"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:text="Quitter" />
+            android:text="Quitter"
+            android:textColor="#FFFFFF"
+            android:background="#111111"
+            android:onClick="quitter" />
 
     </LinearLayout>
 
