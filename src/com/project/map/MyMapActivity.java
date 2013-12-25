@@ -41,6 +41,7 @@ public class MyMapActivity extends MapActivity implements LocationListener {
 		mapView = new MapView(this);
 		mapView.setClickable(true);
 		mapView.setBuiltInZoomControls(true);
+		mapView.getController().setZoom(16);
 		FileOpenResult fileOpenResult = mapView.setMapFile(MAP_FILE);
 		if (!fileOpenResult.isSuccess()) {
 			Toast.makeText(this, fileOpenResult.getErrorMessage(),
@@ -105,6 +106,7 @@ public class MyMapActivity extends MapActivity implements LocationListener {
 		for (Poi p : listePoi)
 			itemizedoverlayPoi.addOverlay(p);
 		itemizedoverlayMaPosition.addOverlay(maPosition);
+		
 		mapOverlays.add(itemizedoverlayMaPosition);
 		mapOverlays.add(itemizedoverlayPoi);
 	}
