@@ -1,0 +1,49 @@
+<nodes>
+
+    <node
+        id="1"
+        name="Polytech Grenoble"
+        lat="45.18456"
+        lon="5.7528171" >
+
+        <tag
+            k="text"
+            v="Ecole d ingé pourrie" />
+
+        <tag
+            k="audio"
+            v="grenoble.mp3" />
+
+        <tag
+            k="visual"
+            v="grenoble.html" />
+
+        <tag
+            k="triggering"
+            v="30" />
+    </node>
+
+    <node
+        id="2"
+        name="Les Tailees"
+        lat="45.1925201"
+        lon="5.7580084" >
+
+        <tag
+            k="text"
+            v="Arret de tram" />
+
+        <tag
+            k="audio"
+            v="tram.mp3" />
+
+        <tag
+            k="visual"
+            v="tram.html" />
+
+        <tag
+            k="triggering"
+            v="10" />
+    </node>
+
+</nodes>
