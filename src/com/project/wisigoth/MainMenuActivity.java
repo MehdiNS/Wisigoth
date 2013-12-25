@@ -1,7 +1,10 @@
 package com.project.wisigoth;
 
+import com.project.map.MyMapActivity;
+
 import android.os.Bundle;
 import android.app.Activity;
+import android.content.Intent;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
@@ -21,9 +24,18 @@ public class MainMenuActivity extends Activity {
 		return true;
 	}
 	
+	public void obtenirPosition(View view) {
+		
+	}
+	
 	public void quitter(View view) {
 		this.finish();
 		
+	}
+	
+	public void testMap(View view) {
+		Intent intent = new Intent(this, MyMapActivity.class);
+        startActivity(intent);
 	}
 	
 	public void onStop() {

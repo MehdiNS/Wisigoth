@@ -30,9 +30,10 @@
             android:id="@+id/button1"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:text="Voir la Carte"
+            android:text="Test MyMapActivity"
             android:textColor="#FFFFFF"
-            android:background="#111111"/>
+            android:background="#111111"
+            android:onClick= "testMap"/>
 
         <Button
             android:id="@+id/button2"
