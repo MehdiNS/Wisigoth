@@ -12,6 +12,7 @@ import org.mapsforge.map.reader.header.FileOpenResult;
 import com.project.parser.TestParsing;
 import com.project.wisigoth.R;
 
+import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
 import android.location.Criteria;
 import android.location.Location;
@@ -98,7 +99,8 @@ public class MyMapActivity extends MapActivity implements LocationListener {
 		Drawable drawableMaPos = this.getResources().getDrawable(
 				R.drawable.my_position);
 		Drawable drawableMarker = this.getResources().getDrawable(
-				R.drawable.marker);
+				R.drawable.blackmarker);
+		
 		MyItemizedOverlay itemizedoverlayPoi = new MyItemizedOverlay(
 				drawableMarker, this);
 		MyItemizedOverlay itemizedoverlayMaPosition = new MyItemizedOverlay(

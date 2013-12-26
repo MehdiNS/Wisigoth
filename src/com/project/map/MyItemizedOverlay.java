@@ -51,4 +51,5 @@ public class MyItemizedOverlay extends ItemizedOverlay<OverlayItem> {
 	  dialog.show();
 	  return true;
 	}
+
 }
