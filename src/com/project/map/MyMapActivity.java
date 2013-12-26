@@ -105,8 +105,10 @@ public class MyMapActivity extends MapActivity implements LocationListener {
 				drawableMarker, this);
 		MyItemizedOverlay itemizedoverlayMaPosition = new MyItemizedOverlay(
 				drawableMaPos, this);
+		
 		for (Poi p : listePoi)
 			itemizedoverlayPoi.addOverlay(p);
+		
 		itemizedoverlayMaPosition.addOverlay(maPosition);
 		
 		mapOverlays.add(itemizedoverlayMaPosition);

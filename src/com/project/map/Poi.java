@@ -80,6 +80,8 @@ public class Poi extends Point{
 		Audio = audio;
 	}
 	
+	
+	
 	public float distanceTo(OverlayItem o){
 		Location locationA = new Location("point A");
 		locationA.setLatitude(getPoint().getLatitude());

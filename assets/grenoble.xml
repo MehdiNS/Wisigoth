@@ -16,7 +16,7 @@
 
         <tag
             k="visual"
-            v="grenoble.html" />
+            v="http://www.google.fr/" />
 
         <tag
             k="triggering"
@@ -39,7 +39,7 @@
 
         <tag
             k="visual"
-            v="tram.html" />
+            v="http://www.perdu.com/" />
 
         <tag
             k="triggering"
