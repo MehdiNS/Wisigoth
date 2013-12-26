@@ -5,10 +5,14 @@ import java.util.ArrayList;
 import org.mapsforge.android.maps.overlay.ItemizedOverlay;
 import org.mapsforge.android.maps.overlay.OverlayItem;
 
+
+
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 
@@ -54,8 +58,8 @@ public class MyItemizedOverlay extends ItemizedOverlay<OverlayItem> {
 
 		AlertDialog.Builder dialog = new AlertDialog.Builder(mContext);
 		dialog.setTitle(item.getTitle());
-		dialog.setMessage("Lat,Lon : " + item.getPoint().getLatitude() + " " + item.getPoint().getLongitude() + 
-				"\n Informations : MERCI MEHDI de pas avoir parsé le texte");
+		dialog.setMessage("Coordonnées : (" + item.getPoint().getLatitude() + ", " + item.getPoint().getLongitude() + 
+				")\nInformations : "+item.getSnippet());
 		dialog.setPositiveButton("Retourner à la carte", new DialogInterface.OnClickListener() {
 			public void onClick(DialogInterface dialog, int id) {
 				dialog.dismiss();
@@ -81,6 +85,14 @@ public class MyItemizedOverlay extends ItemizedOverlay<OverlayItem> {
 				mContext.startActivity(intent);
 			}
 		});
+		
+		int idImage = mContext.getResources().getIdentifier(((Poi)item).getImage(), "drawable", mContext.getPackageName());
+		Drawable d = mContext.getResources().getDrawable(idImage);
+		Bitmap b = ((BitmapDrawable)d).getBitmap();
+	    Bitmap bitmapResized = Bitmap.createScaledBitmap(b, 250, 250, false);
+	    d = new BitmapDrawable(mContext.getResources(),bitmapResized);
+		dialog.setIcon(d);
+		
 		dialog.show();
 
 		return true;

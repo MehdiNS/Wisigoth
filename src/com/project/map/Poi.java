@@ -13,6 +13,7 @@ public class Poi extends Point{
 	private String fileHtml = "";
 	private String externURL = "";
 	private String Audio = "";
+	private String image = "";
 	
 	public Poi (GeoPoint geopoint, String titre, String texte, int i, int trigger, String file) {
 		super(geopoint, titre, texte);
@@ -87,6 +88,14 @@ public class Poi extends Point{
 
 	public void setExternURL(String externURL) {
 		this.externURL = externURL;
+	}
+
+	public String getImage() {
+		return image;
+	}
+
+	public void setImage(String image) {
+		this.image = image;
 	}
 
 	public float distanceTo(OverlayItem o){

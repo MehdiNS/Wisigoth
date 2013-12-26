@@ -25,6 +25,10 @@
         <tag
             k="triggering"
             v="30" />
+        
+        <tag
+            k="image"
+            v="polytechgrenoble" />
     </node>
 
     <node
@@ -52,6 +56,10 @@
         <tag
             k="triggering"
             v="10" />
+        
+        <tag
+            k="image"
+            v="taillees" />
     </node>
 
 </nodes>

@@ -91,7 +91,8 @@ public class Parser extends DefaultHandler {
 				poi.setExternURL(atts.getValue(1));
 			else if (atts.getValue(0).equals("triggering"))
 				poi.setTriggering(Integer.parseInt(atts.getValue(1)));
-
+			else if (atts.getValue(0).equals("image"))
+				poi.setImage(atts.getValue(1));
 		}
 	}
 
