@@ -3,14 +3,11 @@ package com.project.map;
 import org.mapsforge.android.maps.overlay.OverlayItem;
 
 import com.project.wisigoth.R;
-import com.project.wisigoth.R.layout;
-import com.project.wisigoth.R.menu;
 
 import android.os.Bundle;
 import android.app.Activity;
 import android.view.Menu;
 import android.webkit.WebView;
-import android.widget.Toast;
 
 public class WebviewActivity extends Activity {
 

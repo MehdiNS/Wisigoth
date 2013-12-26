@@ -1,7 +1,6 @@
 package com.project.map;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import org.mapsforge.android.maps.overlay.ItemizedOverlay;
 import org.mapsforge.android.maps.overlay.OverlayItem;
@@ -11,10 +10,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
-import android.net.Uri;
 import android.os.Bundle;
-import android.webkit.WebView;
-import android.widget.Toast;
 
 public class MyItemizedOverlay extends ItemizedOverlay<OverlayItem> {
 
@@ -62,10 +58,20 @@ public class MyItemizedOverlay extends ItemizedOverlay<OverlayItem> {
 				"\n Informations : MERCI MEHDI de pas avoir parsé le texte");
 		dialog.setPositiveButton("Retourner à la carte", new DialogInterface.OnClickListener() {
 			public void onClick(DialogInterface dialog, int id) {
-				dialog.cancel();
+				dialog.dismiss();
 			}
 		});
-		dialog.setNegativeButton("Plus d'informations", new DialogInterface.OnClickListener() {
+		dialog.setNegativeButton("Lien wikipedia", new DialogInterface.OnClickListener() {
+			public void onClick(DialogInterface dialog, int id) {
+				Intent intent = new Intent(mContext,WebviewActivity.class);
+				Bundle b = new Bundle();
+
+				b.putString("url", ((Poi)item).getExternURL());
+				intent.putExtras(b);
+				mContext.startActivity(intent);
+			}
+		});
+		dialog.setNeutralButton("Plus d'informations", new DialogInterface.OnClickListener() {
 			public void onClick(DialogInterface dialog, int id) {
 				Intent intent = new Intent(mContext,WebviewActivity.class);
 				Bundle b = new Bundle();

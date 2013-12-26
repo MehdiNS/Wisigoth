@@ -12,7 +12,6 @@ import org.mapsforge.map.reader.header.FileOpenResult;
 import com.project.parser.TestParsing;
 import com.project.wisigoth.R;
 
-import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
 import android.location.Criteria;
 import android.location.Location;

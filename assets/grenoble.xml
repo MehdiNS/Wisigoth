@@ -15,7 +15,11 @@
             v="grenoble.mp3" />
 
         <tag
-            k="visual"
+            k="local"
+            v="" />
+        
+		<tag
+            k="extern"
             v="http://www.google.fr/" />
 
         <tag
@@ -38,9 +42,13 @@
             v="tram.mp3" />
 
         <tag
-            k="visual"
+            k="local"
+            v="" />
+        
+		<tag
+            k="extern"
             v="http://www.perdu.com/" />
-
+		
         <tag
             k="triggering"
             v="10" />

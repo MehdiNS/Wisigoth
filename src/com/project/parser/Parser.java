@@ -85,8 +85,10 @@ public class Parser extends DefaultHandler {
 				poi.setSnippet(atts.getValue(1));
 			else if (atts.getValue(0).equals("audio"))
 				poi.setAudio(atts.getValue(1));
-			else if (atts.getValue(0).equals("visual"))
+			else if (atts.getValue(0).equals("local"))
 				poi.setFileHtml(atts.getValue(1));
+			else if (atts.getValue(0).equals("extern"))
+				poi.setExternURL(atts.getValue(1));
 			else if (atts.getValue(0).equals("triggering"))
 				poi.setTriggering(Integer.parseInt(atts.getValue(1)));
 

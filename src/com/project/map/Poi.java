@@ -11,6 +11,7 @@ public class Poi extends Point{
 	private int id = 0;
 	private int triggering = 999999;
 	private String fileHtml = "";
+	private String externURL = "";
 	private String Audio = "";
 	
 	public Poi (GeoPoint geopoint, String titre, String texte, int i, int trigger, String file) {
@@ -80,8 +81,14 @@ public class Poi extends Point{
 		Audio = audio;
 	}
 	
-	
-	
+	public String getExternURL() {
+		return externURL;
+	}
+
+	public void setExternURL(String externURL) {
+		this.externURL = externURL;
+	}
+
 	public float distanceTo(OverlayItem o){
 		Location locationA = new Location("point A");
 		locationA.setLatitude(getPoint().getLatitude());
