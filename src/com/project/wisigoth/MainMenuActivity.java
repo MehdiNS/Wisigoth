@@ -42,5 +42,9 @@ public class MainMenuActivity extends Activity {
 		Log.i("Wisigoth onStop","MainMenuActivity : passage dans onStop()");
 		super.onStop();
 	}
+	
+	public void gpsSetting(View view) {
+		startActivityForResult(new Intent(android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS), 0);
+	}
 
 }
