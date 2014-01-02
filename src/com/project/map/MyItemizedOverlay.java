@@ -59,7 +59,7 @@ public class MyItemizedOverlay extends ItemizedOverlay<OverlayItem> {
 		AlertDialog.Builder dialog = new AlertDialog.Builder(mContext);
 		dialog.setTitle(item.getTitle());
 		dialog.setMessage("Coordonnées : (" + item.getPoint().getLatitude() + ", " + item.getPoint().getLongitude() + 
-				")\nInformations : "+item.getSnippet());
+				")\nInformations : \n\n"+item.getSnippet());
 		dialog.setPositiveButton("Retourner à la carte", new DialogInterface.OnClickListener() {
 			public void onClick(DialogInterface dialog, int id) {
 				dialog.dismiss();
