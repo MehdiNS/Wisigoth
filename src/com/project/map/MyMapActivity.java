@@ -12,6 +12,7 @@ import org.mapsforge.map.reader.header.FileOpenResult;
 import com.project.parser.TestParsing;
 import com.project.wisigoth.R;
 
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.location.Criteria;
 import android.location.Location;
@@ -136,6 +137,34 @@ public class MyMapActivity extends MapActivity implements LocationListener {
 		maPosition.setPoint(new GeoPoint(arg0.getLatitude(), arg0
 				.getLongitude()));
 		mapView.redrawTiles();
+		
+		double lat1,lat2;
+		double long1,long2;
+		Location l1,l2;
+		lat1 = maPosition.getPoint().getLatitude();
+		long1 = maPosition.getPoint().getLongitude();
+		l1 = new Location("me");
+		l1.setLatitude(lat1);
+		l1.setLongitude(long1);
+		// Look if any Point of Interest matches with the current position
+		for(Poi p : listePoi) {
+			lat2 = p.getPoint().getLatitude();
+			long2 = p.getPoint().getLongitude();
+			l2 = new Location("poi");
+			l2.setLatitude(lat2);
+			l2.setLongitude(long2);
+			
+			if(l1.distanceTo(l2) <= p.getTriggering()) {
+				// Start the point of interest 's view
+				Intent intent = new Intent(this,WebviewActivity.class);
+				Bundle b = new Bundle();
+
+				b.putString("url", ((Poi)p).getExternURL());
+				intent.putExtras(b);
+				this.startActivity(intent);
+			}
+			
+		}
 
 	}
 
@@ -143,11 +172,11 @@ public class MyMapActivity extends MapActivity implements LocationListener {
 		locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
 		if (locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
 			locationManager.requestLocationUpdates(
-					LocationManager.GPS_PROVIDER, 10000, 20, this);
+					LocationManager.GPS_PROVIDER, 2000, 20, this);
 
 		} else {
 			locationManager.requestLocationUpdates(
-					LocationManager.NETWORK_PROVIDER, 10000, 20, this);
+					LocationManager.NETWORK_PROVIDER, 2000, 20, this);
 		}
 	}
 
@@ -156,12 +185,12 @@ public class MyMapActivity extends MapActivity implements LocationListener {
 		locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
 		if (locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
 			locationManager.requestLocationUpdates(
-					LocationManager.GPS_PROVIDER, 10000, 20, this);
+					LocationManager.GPS_PROVIDER, 2000, 20, this);
 			Toast.makeText(this, "Enclenchement du " + provider,
 					Toast.LENGTH_SHORT).show();
 		} else {
 			locationManager.requestLocationUpdates(
-					LocationManager.NETWORK_PROVIDER, 10000, 20, this);
+					LocationManager.NETWORK_PROVIDER, 2000, 20, this);
 			Toast.makeText(this, "Enclenchement du " + provider,
 					Toast.LENGTH_SHORT).show();
 		}
@@ -171,6 +200,7 @@ public class MyMapActivity extends MapActivity implements LocationListener {
 	@Override
 	public void onStatusChanged(String arg0, int arg1, Bundle arg2) {
 		// TODO Auto-generated method stub
+		Toast.makeText(this, "OnStatusChanged", Toast.LENGTH_SHORT).show();
 	}
 
 }
