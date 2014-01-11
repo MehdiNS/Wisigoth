@@ -9,21 +9,25 @@ import org.mapsforge.core.GeoPoint;
 
 import android.app.AlertDialog;
 import android.content.Context;
+import android.content.ContextWrapper;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.speech.tts.TextToSpeech;
+import android.speech.tts.TextToSpeech.OnInitListener;
 import android.util.Log;
+import android.widget.EditText;
 import android.widget.Toast;
 
 public class MyItemizedOverlay extends ItemizedOverlay<OverlayItem> {
 
 	private static final String TAG = "MyActivity";
-
 	private ArrayList<OverlayItem> mOverlays = new ArrayList<OverlayItem>();
 	Context mContext;
+	private MyTTS tts;
 
 	public MyItemizedOverlay(Drawable defaultMarker) {
 		super(boundCenterBottom(defaultMarker));
@@ -32,6 +36,7 @@ public class MyItemizedOverlay extends ItemizedOverlay<OverlayItem> {
 	public MyItemizedOverlay(Drawable defaultMarker, Context context) {
 		super(boundCenterBottom(defaultMarker));
 		mContext = context;
+		tts = new MyTTS(mContext,"");
 	}
 
 	@Override
@@ -84,7 +89,7 @@ public class MyItemizedOverlay extends ItemizedOverlay<OverlayItem> {
 						mContext.startActivity(intent);
 					}
 				});
-		dialog.setNeutralButton("Plus d'informations",
+/*		dialog.setNeutralButton("Plus d'informations",
 				new DialogInterface.OnClickListener() {
 					public void onClick(DialogInterface dialog, int id) {
 						Intent intent = new Intent(mContext,
@@ -95,6 +100,14 @@ public class MyItemizedOverlay extends ItemizedOverlay<OverlayItem> {
 						intent.putExtras(b);
 						mContext.startActivity(intent);
 					}
+				});*/
+		dialog.setNeutralButton("Text to Speech",
+				new DialogInterface.OnClickListener() {
+					public void onClick(DialogInterface dialog, int id) {
+						tts.setText(item.getSnippet());
+						tts.initTTS();
+					
+					};
 				});
 
 		int idImage = mContext.getResources().getIdentifier(
@@ -115,4 +128,5 @@ public class MyItemizedOverlay extends ItemizedOverlay<OverlayItem> {
 		return true;
 	}
 
+	
 }
