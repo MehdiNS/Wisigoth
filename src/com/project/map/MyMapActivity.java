@@ -12,7 +12,9 @@ import org.mapsforge.map.reader.header.FileOpenResult;
 import com.project.parser.TestParsing;
 import com.project.wisigoth.R;
 
+import android.app.PendingIntent;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.graphics.drawable.Drawable;
 import android.location.Criteria;
 import android.location.Location;
@@ -20,6 +22,7 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.os.Environment;
+import android.util.Log;
 import android.widget.Toast;
 
 public class MyMapActivity extends MapActivity implements LocationListener {
@@ -33,7 +36,7 @@ public class MyMapActivity extends MapActivity implements LocationListener {
 	private LocationManager locationManager;
 	@SuppressWarnings("unused")
 	private String provider;
-	
+
 	private Poi lastOpenedPoi = null;
 
 	@Override
@@ -70,7 +73,7 @@ public class MyMapActivity extends MapActivity implements LocationListener {
 				try {
 					maPosition.setPoint(new GeoPoint((int) (location
 							.getLatitude() * 1E6), (int) (location
-							.getLongitude() * 1E6)));
+									.getLongitude() * 1E6)));
 					provider = LocationManager.GPS_PROVIDER;
 				} catch (Exception e) {
 
@@ -88,7 +91,7 @@ public class MyMapActivity extends MapActivity implements LocationListener {
 					try {
 						maPosition.setPoint(new GeoPoint((int) (location
 								.getLatitude() * 1E6), (int) (location
-								.getLongitude() * 1E6)));
+										.getLongitude() * 1E6)));
 						provider = LocationManager.NETWORK_PROVIDER;
 					} catch (Exception e) {
 
@@ -102,17 +105,28 @@ public class MyMapActivity extends MapActivity implements LocationListener {
 				R.drawable.my_position);
 		Drawable drawableMarker = this.getResources().getDrawable(
 				R.drawable.blackmarker);
-		
+
 		MyItemizedOverlay itemizedoverlayPoi = new MyItemizedOverlay(
 				drawableMarker, this);
 		MyItemizedOverlay itemizedoverlayMaPosition = new MyItemizedOverlay(
 				drawableMaPos, this);
-		
-		for (Poi p : listePoi) 
+
+		for (Poi p : listePoi) {
 			itemizedoverlayPoi.addOverlay(p);
-		
+			Intent mIntent = new Intent("com.project.ProximityAlert");
+			double lat = p.getPoint().getLatitude();
+			double lon = p.getPoint().getLongitude();
+			
+			PendingIntent pIntent = PendingIntent.getBroadcast(this, 0, mIntent, 0);
+			
+			locationManager.addProximityAlert(lat, lon, p.getTriggering(), -1, pIntent);
+			IntentFilter filter = new IntentFilter("com.project.ProximityAlert"); 
+			registerReceiver(new MapService(), filter);
+			Log.i("Wisigoth onStop","ajout point "+p.getPoint().getLatitude()+" "+p.getPoint().getLongitude()+" trigger"+p.getTriggering());
+
+		}
 		itemizedoverlayMaPosition.addOverlay(maPosition);
-		
+
 		mapOverlays.add(itemizedoverlayMaPosition);
 		mapOverlays.add(itemizedoverlayPoi);
 	}
@@ -139,7 +153,7 @@ public class MyMapActivity extends MapActivity implements LocationListener {
 		maPosition.setPoint(new GeoPoint(arg0.getLatitude(), arg0
 				.getLongitude()));
 		mapView.redrawTiles();
-		
+
 		double lat1,lat2;
 		double long1,long2;
 		Location l1,l2;
@@ -155,7 +169,7 @@ public class MyMapActivity extends MapActivity implements LocationListener {
 			l2 = new Location("poi");
 			l2.setLatitude(lat2);
 			l2.setLongitude(long2);
-			
+
 			if((l1.distanceTo(l2) <= p.getTriggering()) && (p!=lastOpenedPoi)) {
 				lastOpenedPoi = p;
 				// Start the point of interest 's view
@@ -165,11 +179,11 @@ public class MyMapActivity extends MapActivity implements LocationListener {
 				b.putString("url", ((Poi)p).getExternURL());
 				intent.putExtras(b);
 				this.startActivity(intent);
-				
+
 			}
-			
+
 		}
-		
+
 
 	}
 
