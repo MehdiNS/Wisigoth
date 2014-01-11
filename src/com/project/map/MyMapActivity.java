@@ -33,6 +33,8 @@ public class MyMapActivity extends MapActivity implements LocationListener {
 	private LocationManager locationManager;
 	@SuppressWarnings("unused")
 	private String provider;
+	
+	private Poi lastOpenedPoi = null;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -106,7 +108,7 @@ public class MyMapActivity extends MapActivity implements LocationListener {
 		MyItemizedOverlay itemizedoverlayMaPosition = new MyItemizedOverlay(
 				drawableMaPos, this);
 		
-		for (Poi p : listePoi)
+		for (Poi p : listePoi) 
 			itemizedoverlayPoi.addOverlay(p);
 		
 		itemizedoverlayMaPosition.addOverlay(maPosition);
@@ -154,7 +156,8 @@ public class MyMapActivity extends MapActivity implements LocationListener {
 			l2.setLatitude(lat2);
 			l2.setLongitude(long2);
 			
-			if(l1.distanceTo(l2) <= p.getTriggering()) {
+			if((l1.distanceTo(l2) <= p.getTriggering()) && (p!=lastOpenedPoi)) {
+				lastOpenedPoi = p;
 				// Start the point of interest 's view
 				Intent intent = new Intent(this,WebviewActivity.class);
 				Bundle b = new Bundle();
@@ -162,9 +165,11 @@ public class MyMapActivity extends MapActivity implements LocationListener {
 				b.putString("url", ((Poi)p).getExternURL());
 				intent.putExtras(b);
 				this.startActivity(intent);
+				
 			}
 			
 		}
+		
 
 	}
 

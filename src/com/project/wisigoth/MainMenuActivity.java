@@ -1,13 +1,19 @@
 package com.project.wisigoth;
 
+import java.util.ArrayList;
+
+import com.project.map.MapService;
 import com.project.map.MyMapActivity;
 
 import android.os.Bundle;
 import android.app.Activity;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
+import android.app.AlertDialog;
+
 
 public class MainMenuActivity extends Activity {
 
@@ -23,28 +29,32 @@ public class MainMenuActivity extends Activity {
 		getMenuInflater().inflate(R.menu.main_menu, menu);
 		return true;
 	}
-	
+
 	public void obtenirPosition(View view) {
-		
+
 	}
-	
+
 	public void quitter(View view) {
 		this.finish();
-		
+
 	}
-	
+
 	public void testMap(View view) {
 		Intent intent = new Intent(this, MyMapActivity.class);
-        startActivity(intent);
+		startActivity(intent);
 	}
-	
+
 	public void onStop() {
 		Log.i("Wisigoth onStop","MainMenuActivity : passage dans onStop()");
 		super.onStop();
 	}
-	
+
 	public void gpsSetting(View view) {
 		startActivityForResult(new Intent(android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS), 0);
+	}
+
+	public void setPositionFictive(View view) {
+
 	}
 
 }
