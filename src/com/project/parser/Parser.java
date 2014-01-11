@@ -99,7 +99,6 @@ public class Parser extends DefaultHandler {
 	public void endElement(String uri, String name, String qName)
 			throws SAXException {
 		if (qName.equals("node")) {
-
 			poi.setPoint(new GeoPoint(tempLat, tempLon));
 			listePoi.add(poi);
 		}
