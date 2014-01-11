@@ -19,7 +19,7 @@ import android.util.Log;
 import android.widget.Toast;
 
 public class MyItemizedOverlay extends ItemizedOverlay<OverlayItem> {
-	
+
 	private static final String TAG = "MyActivity";
 
 	private ArrayList<OverlayItem> mOverlays = new ArrayList<OverlayItem>();
@@ -53,9 +53,8 @@ public class MyItemizedOverlay extends ItemizedOverlay<OverlayItem> {
 	protected boolean onTap(int index) {
 		final OverlayItem item = mOverlays.get(index);
 		/*
-		 * bref dialog.setMessage("Lat,Lon : " +
-		 * item.getPoint().getLatitude() + " " + item.getPoint().getLongitude()
-		 * + "\nMa position : Lat,Lon : " +
+		 * bref dialog.setMessage("Lat,Lon : " + item.getPoint().getLatitude() +
+		 * " " + item.getPoint().getLongitude() + "\nMa position : Lat,Lon : " +
 		 * MyMapActivity.maPosition.getPoint().getLatitude() + " "+
 		 * MyMapActivity.maPosition.getPoint().getLongitude() +"\nDistance : " +
 		 * ((Point) item).distanceTo(MyMapActivity.maPosition) + "mètres");
@@ -66,8 +65,8 @@ public class MyItemizedOverlay extends ItemizedOverlay<OverlayItem> {
 		AlertDialog.Builder dialog = new AlertDialog.Builder(mContext);
 		dialog.setTitle(item.getTitle());
 		dialog.setMessage("Coordonn�es : (" + item.getPoint().getLatitude()
-				+ ", " + item.getPoint().getLongitude() + ")\nInformations : "
-				+ item.getSnippet());
+				+ ", " + item.getPoint().getLongitude()
+				+ ")\nInformations : \n\n" + item.getSnippet());
 		dialog.setPositiveButton("Retourner � la carte",
 				new DialogInterface.OnClickListener() {
 					public void onClick(DialogInterface dialog, int id) {
@@ -80,7 +79,6 @@ public class MyItemizedOverlay extends ItemizedOverlay<OverlayItem> {
 						Intent intent = new Intent(mContext,
 								WebviewActivity.class);
 						Bundle b = new Bundle();
-
 						b.putString("url", ((Poi) item).getExternURL());
 						intent.putExtras(b);
 						mContext.startActivity(intent);

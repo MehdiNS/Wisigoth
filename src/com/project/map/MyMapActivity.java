@@ -5,7 +5,6 @@ import java.util.List;
 
 import org.mapsforge.android.maps.MapActivity;
 import org.mapsforge.android.maps.MapView;
-import org.mapsforge.android.maps.Projection;
 import org.mapsforge.android.maps.overlay.Overlay;
 import org.mapsforge.core.GeoPoint;
 import org.mapsforge.map.reader.header.FileOpenResult;
@@ -13,12 +12,6 @@ import org.mapsforge.map.reader.header.FileOpenResult;
 import com.project.parser.TestParsing;
 import com.project.wisigoth.R;
 
-import android.app.Notification;
-import android.app.NotificationManager;
-import android.app.PendingIntent;
-import android.content.Context;
-import android.content.Intent;
-import android.graphics.Canvas;
 import android.graphics.drawable.Drawable;
 import android.location.Criteria;
 import android.location.Location;
@@ -26,7 +19,6 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.os.Environment;
-import android.view.GestureDetector;
 import android.widget.Toast;
 
 public class MyMapActivity extends MapActivity implements LocationListener {
@@ -107,17 +99,17 @@ public class MyMapActivity extends MapActivity implements LocationListener {
 				R.drawable.my_position);
 		Drawable drawableMarker = this.getResources().getDrawable(
 				R.drawable.blackmarker);
-
+		
 		MyItemizedOverlay itemizedoverlayPoi = new MyItemizedOverlay(
 				drawableMarker, this);
 		MyItemizedOverlay itemizedoverlayMaPosition = new MyItemizedOverlay(
 				drawableMaPos, this);
-
+		
 		for (Poi p : listePoi)
 			itemizedoverlayPoi.addOverlay(p);
-
+		
 		itemizedoverlayMaPosition.addOverlay(maPosition);
-
+		
 		mapOverlays.add(itemizedoverlayMaPosition);
 		mapOverlays.add(itemizedoverlayPoi);
 	}
@@ -140,14 +132,11 @@ public class MyMapActivity extends MapActivity implements LocationListener {
 	@Override
 	public void onLocationChanged(Location arg0) {
 		// TODO Auto-generated method stub
+		Toast.makeText(this, "DEBUT", Toast.LENGTH_SHORT).show();
 		maPosition.setPoint(new GeoPoint(arg0.getLatitude(), arg0
 				.getLongitude()));
-		for(Poi p : listePoi){
-			if (p.distanceTo(maPosition) <= p.getTriggering()){
-				createNotification();
-			}
-		}
 		mapView.redrawTiles();
+
 	}
 
 	public void onProviderDisabled(String provider) {
@@ -182,25 +171,6 @@ public class MyMapActivity extends MapActivity implements LocationListener {
 	@Override
 	public void onStatusChanged(String arg0, int arg1, Bundle arg2) {
 		// TODO Auto-generated method stub
-	}
-
-	private void createNotification() {
-		final NotificationManager mNotification = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
-
-		final Intent launchNotifiactionIntent = new Intent(this,
-				WebviewActivity.class);
-		final PendingIntent pendingIntent = PendingIntent.getActivity(this,
-				0, launchNotifiactionIntent,
-				PendingIntent.FLAG_ONE_SHOT);
-
-		Notification.Builder builder = new Notification.Builder(this)
-				.setWhen(System.currentTimeMillis())
-				.setTicker("Titre de la noti").setSmallIcon(R.drawable.homemenu)
-				.setContentTitle(getResources().getString(R.string.app_name))
-				.setContentText(getResources().getString(R.string.app_name))
-				.setContentIntent(pendingIntent);
-
-		mNotification.notify(001, builder.build());
 	}
 
 }

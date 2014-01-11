@@ -1,0 +1,318 @@
+<nodes>
+
+    <node
+        id="1"
+        name="Polytech Grenoble"
+        lat="45.18456"
+        lon="5.7528171" >
+
+        <tag
+            k="text"
+            v="L’École Polytechnique de l'université Grenoble-I, plus communément appelée Polytech Grenoble (anciennement ISTG), est l'école d'ingénieurs de l'Université Joseph Fourier. Elle est située près de la mairie de Saint-Martin-d’Hères, à quelques centaines de mètres du domaine universitaire de Saint-Martin-d’Hères et Gières. Polytech Grenoble appartient au réseau Polytech qui regroupe treize écoles d'ingénieurs universitaires dans toute la France." />
+
+        <tag
+            k="audio"
+            v="grenoble.mp3" />
+
+        <tag
+            k="local"
+            v="" />
+        
+		<tag
+            k="extern"
+            v="http://fr.wikipedia.org/wiki/Polytech_Grenoble" />
+
+        <tag
+            k="triggering"
+            v="30" />
+        
+        <tag
+            k="image"
+            v="polytechgrenoble" />
+    </node>
+
+    <node
+        id="2"
+        name="Stade des alpes"
+        lat="45.188281"
+        lon="5.740332" >
+
+        <tag
+            k="text"
+            v="Le Stade des Alpes est un équipement sportif de la collectivité Grenoble Alpes Métropole attaché au Pôle d'Animation et Gestion des Equipements Sportifs." />
+
+        <tag
+            k="audio"
+            v="none.mp3" />
+
+        <tag
+            k="local"
+            v="" />
+        
+		<tag
+            k="extern"
+            v="http://fr.wikipedia.org/wiki/Stade_des_Alpes" />
+		
+        <tag
+            k="triggering"
+            v="100" />
+        
+        <tag
+            k="image"
+            v="stadedesalpes" />
+    </node>
+    
+    <node
+        id="3"
+        name="Fort de la Bastille"
+        lat="45.198709"
+        lon="5.725324" >
+
+        <tag
+            k="text"
+            v="La Bastille est un fort militaire du XIXe siècle culminant à 476 mètres d'altitude sur les derniers contreforts du massif de la Chartreuse, et dominant de 264 mètres la ville de Grenoble." />
+        <tag
+            k="audio"
+            v="none.mp3" />
+
+        <tag
+            k="local"
+            v="" />
+        
+		<tag
+            k="extern"
+            v="http://fr.wikipedia.org/wiki/Fort_de_la_Bastille_(Grenoble)" />
+		
+        <tag
+            k="triggering"
+            v="100" />
+        
+        <tag
+            k="image"
+            v="fortbastille" />
+    </node>
+    
+    <node
+        id="4"
+        name="Téléphérique de la Bastille"
+        lat="45.192971"
+        lon="5.726191" >
+
+        <tag
+            k="text"
+            v="Le Téléphérique de Grenoble Bastille est un moyen de transport touristique qui relie le centre-ville de Grenoble à la colline de la Bastille sur une dénivelée de 266 mètres." />
+            
+        <tag
+            k="audio"
+            v="none.mp3" />
+
+        <tag
+            k="local"
+            v="" />
+        
+		<tag
+            k="extern"
+            v="http://fr.wikipedia.org/wiki/T%C3%A9l%C3%A9ph%C3%A9rique_de_Grenoble_Bastille" />
+		
+        <tag
+            k="triggering"
+            v="100" />
+        
+        <tag
+            k="image"
+            v="telepheriquebastille" />
+    </node>
+    
+    <node
+        id="5"
+        name="Musée de Grenoble"
+        lat="45.194271"
+        lon="5.732264" >
+
+        <tag
+            k="text"
+            v="Le musée de Grenoble est un musée municipal des beaux-arts et antiquités de la ville de Grenoble en Isère." 
+            />
+            
+        <tag
+            k="audio"
+            v="none.mp3" />
+
+        <tag
+            k="local"
+            v="" />
+        
+		<tag
+            k="extern"
+            v="http://fr.wikipedia.org/wiki/Mus%C3%A9e_de_Grenoble" />
+		
+        <tag
+            k="triggering"
+            v="100" />
+        
+        <tag
+            k="image"
+            v="museegrenoble" />
+    </node>
+   
+    <node
+        id="6"
+        name="Le Magasin"
+        lat="45.187633"
+        lon="5.704519" >
+
+        <tag
+            k="text"
+            v="Le Magasin est un centre national d'art contemporain français situé sur le cours Berriat à Grenoble." 
+            />
+            
+        <tag
+            k="audio"
+            v="none.mp3" />
+
+        <tag
+            k="local"
+            v="" />
+        
+		<tag
+            k="extern"
+            v="http://fr.wikipedia.org/wiki/Le_Magasin" />
+		
+        <tag
+            k="triggering"
+            v="100" />
+        
+        <tag
+            k="image"
+            v="magasin" />
+    </node>
+    
+    <node
+        id="7"
+        name="Le Musée Dauphinois"
+        lat="45.195012"
+        lon="5.726363" >
+
+        <tag
+            k="text"
+            v="Le Musée dauphinois est un musée départemental, service du Conseil général de l'Isère, situé à Grenoble en Isère." 
+            />
+            
+        <tag
+            k="audio"
+            v="none.mp3" />
+
+        <tag
+            k="local"
+            v="" />
+        
+		<tag
+            k="extern"
+            v="http://fr.wikipedia.org/wiki/Mus%C3%A9e_dauphinois" />
+		
+        <tag
+            k="triggering"
+            v="100" />
+        
+        <tag
+            k="image"
+            v="museedauphinois" />
+    </node>
+    
+    <node
+        id="8"
+        name="Cathédrale Notre-Dame de Grenoble"
+        lat="45.1925"
+        lon="5.7322" >
+
+        <tag
+            k="text"
+            v="La cathédrale Notre-Dame de Grenoble est une cathédrale catholique romaine située à Grenoble en Isère. Construite à partir du Xe siècle, elle est le siège de l’évêché de Grenoble. Elle a été classée sur la liste des Monuments historiques en 1862."
+            />
+            
+        <tag
+            k="audio"
+            v="none.mp3" />
+
+        <tag
+            k="local"
+            v="" />
+        
+		<tag
+            k="extern"
+            v="http://fr.wikipedia.org/wiki/Cath%C3%A9drale_Notre-Dame_de_Grenoble" />
+		
+        <tag
+            k="triggering"
+            v="100" />
+        
+        <tag
+            k="image"
+            v="notredame" />
+    </node>
+    
+    <node
+        id="9"
+        name="Musée de la résistance et de la déportation"
+        lat="45.190022"
+        lon="5.735268" >
+
+        <tag
+            k="text"
+            v="Le musée de la résistance et de la déportation de l'Isère est un musée départemental créé en 1966 et situé à Grenoble en France."
+             />
+            
+        <tag
+            k="audio"
+            v="none.mp3" />
+
+        <tag
+            k="local"
+            v="" />
+        
+		<tag
+            k="extern"
+            v="http://fr.wikipedia.org/wiki/Mus%C3%A9e_de_la_R%C3%A9sistance_et_de_la_D%C3%A9portation_de_l'Is%C3%A8re" />
+		
+        <tag
+            k="triggering"
+            v="100" />
+        
+        <tag
+            k="image"
+            v="museeresistance" />
+    </node>
+    
+    <node
+        id="10"
+        name="Parc Paul Mistral"
+        lat="45.185863"
+        lon="5.735954" >
+
+        <tag
+            k="text"
+            v="Le parc Paul-Mistral est un parc urbain de 27 hectares d'un seul tenant, situé à Grenoble, renfermant plusieurs équipements sportifs majeurs, ainsi que l'hôtel de ville."
+            />
+            
+        <tag
+            k="audio"
+            v="none.mp3" />
+
+        <tag
+            k="local"
+            v="" />
+        
+		<tag
+            k="extern"
+            v="http://fr.wikipedia.org/wiki/Parc_Paul-Mistral" />
+		
+        <tag
+            k="triggering"
+            v="100" />
+        
+        <tag
+            k="image"
+            v="paulmistral" />
+    </node>
+
+</nodes>
