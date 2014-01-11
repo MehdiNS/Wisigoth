@@ -16,11 +16,13 @@ import android.util.Log;
 import android.widget.Toast;
 
 public class MapService extends BroadcastReceiver {
-	private static final int NOTIFICATION_ID = 1000;
+	private static final int NOTIFICATION_ID = 1001;
 
 	@Override
 	public void onReceive(Context context, Intent intent) {
 		Log.i("Wisigoth onStop","map");
+		Toast.makeText(context, "Welcome to my Area", 600).show();
+		
 		String key = LocationManager.KEY_PROXIMITY_ENTERING;
 		Boolean entering = intent.getBooleanExtra(key, false);
 		if (entering) {
@@ -34,7 +36,7 @@ public class MapService extends BroadcastReceiver {
 		PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, notificationIntent, 0);
 		Log.d(getClass().getSimpleName(), "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
 		Notification notification = createNotification();
-		notification.setLatestEventInfo(context, "Wisigoth Proximity Alert!", "You are near your point of interest.", pendingIntent);
+		notification.setLatestEventInfo(context, "Wisigoth", "Cliquer ici pour découvrir le point d'intérêt !", pendingIntent);
 
 		notificationManager.notify(NOTIFICATION_ID, notification);
 	}

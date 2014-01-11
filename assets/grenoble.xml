@@ -24,8 +24,8 @@
 
         <tag
             k="triggering"
-            v="30" />
-
+            v="100" />
+        
         <tag
             k="image"
             v="polytechgrenoble" />

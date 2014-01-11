@@ -30,16 +30,23 @@
         <activity
             android:name="com.project.wisigoth.MainMenuActivity"
             android:label="@string/title_activity_main_menu" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
-        <activity android:name="com.project.map.MyMapActivity" 
-        android:clickable="true" >
+        <activity android:name="com.project.map.MyMapActivity" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <activity
             android:name="com.project.map.WebviewActivity"
             android:label="@string/title_activity_webview" >
         </activity>
 
-     
+
     </application>
 
 </manifest>

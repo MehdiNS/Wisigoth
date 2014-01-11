@@ -42,14 +42,18 @@ public class MyMapActivity extends MapActivity implements LocationListener {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+
 		TestParsing t = new TestParsing();
 		listePoi = t.test(this);
-		super.onCreate(savedInstanceState);
+
 		mapView = new MapView(this);
 		mapView.setClickable(true);
 		mapView.setBuiltInZoomControls(true);
 		mapView.getController().setZoom(16);
+
 		FileOpenResult fileOpenResult = mapView.setMapFile(MAP_FILE);
+
 		if (!fileOpenResult.isSuccess()) {
 			Toast.makeText(this, fileOpenResult.getErrorMessage(),
 					Toast.LENGTH_LONG).show();
@@ -63,18 +67,14 @@ public class MyMapActivity extends MapActivity implements LocationListener {
 		// Define a listener that responds to location updates
 
 		// getting GPS status
-		boolean isGPSEnabled = locationManager
-				.isProviderEnabled(LocationManager.GPS_PROVIDER);
+		boolean isGPSEnabled = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
 
 		// check if GPS enabled
 		if (isGPSEnabled) {
-			Location location = locationManager
-					.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+			Location location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
 			if (location != null) {
 				try {
-					maPosition.setPoint(new GeoPoint((int) (location
-							.getLatitude() * 1E6), (int) (location
-									.getLongitude() * 1E6)));
+					maPosition.setPoint(new GeoPoint((int) (location.getLatitude() * 1E6), (int) (location.getLongitude() * 1E6)));
 					provider = LocationManager.GPS_PROVIDER;
 				} catch (Exception e) {
 
@@ -112,20 +112,32 @@ public class MyMapActivity extends MapActivity implements LocationListener {
 		MyItemizedOverlay itemizedoverlayMaPosition = new MyItemizedOverlay(
 				drawableMaPos, this);
 
-		final MapService br = new MapService();
+
+		
+		
+		
+		Intent mIntent = new Intent("com.project.ProximityAlert");
+		double lat = listePoi.get(0).getPoint().getLatitude();
+		double lon = listePoi.get(0).getPoint().getLongitude();
+
+		PendingIntent pIntent = PendingIntent.getBroadcast(getApplicationContext(), 0, mIntent, 0);
+
+		locationManager.addProximityAlert(lat, lon, 100, -1, pIntent);
+
+		IntentFilter filter = new IntentFilter("com.project.ProximityAlert"); 
+		registerReceiver(new MapService(), filter);
+		Log.i("Wisigoth onStop","ajout point "+listePoi.get(0).getTitle());
+		
+		
+		
+		
+		
+		
 		for (Poi p : listePoi) {
 			itemizedoverlayPoi.addOverlay(p);
-			Intent mIntent = new Intent("com.project.ProximityAlert"+p.getTitle());
-			double lat = p.getPoint().getLatitude();
-			double lon = p.getPoint().getLongitude();
+
 			
-			PendingIntent pIntent = PendingIntent.getBroadcast(this, 0, mIntent, 0);
-			
-			locationManager.addProximityAlert(lat, lon, p.getTriggering(), -1, pIntent);
-			IntentFilter filter = new IntentFilter("com.project.ProximityAlert/"+p.getTitle()); 
-			
-			registerReceiver(br, filter);
-			Log.i("Wisigoth onStop","ajout point "+p.getPoint().getLatitude()+" "+p.getPoint().getLongitude()+" trigger"+p.getTriggering());
+
 
 		}
 		itemizedoverlayMaPosition.addOverlay(maPosition);
@@ -136,10 +148,8 @@ public class MyMapActivity extends MapActivity implements LocationListener {
 
 	protected void onResume() {
 		super.onResume();
-		locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER,
-				10000, 20, this);
-		locationManager.requestLocationUpdates(
-				LocationManager.NETWORK_PROVIDER, 10000, 20, this);
+		locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER,2000, 20, this);
+		locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 2000, 20, this);
 	}
 
 	@Override
