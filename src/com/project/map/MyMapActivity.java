@@ -112,17 +112,19 @@ public class MyMapActivity extends MapActivity implements LocationListener {
 		MyItemizedOverlay itemizedoverlayMaPosition = new MyItemizedOverlay(
 				drawableMaPos, this);
 
+		final MapService br = new MapService();
 		for (Poi p : listePoi) {
 			itemizedoverlayPoi.addOverlay(p);
-			Intent mIntent = new Intent("com.project.ProximityAlert");
+			Intent mIntent = new Intent("com.project.ProximityAlert"+p.getTitle());
 			double lat = p.getPoint().getLatitude();
 			double lon = p.getPoint().getLongitude();
 			
 			PendingIntent pIntent = PendingIntent.getBroadcast(this, 0, mIntent, 0);
 			
 			locationManager.addProximityAlert(lat, lon, p.getTriggering(), -1, pIntent);
-			IntentFilter filter = new IntentFilter("com.project.ProximityAlert"); 
-			registerReceiver(new MapService(), filter);
+			IntentFilter filter = new IntentFilter("com.project.ProximityAlert/"+p.getTitle()); 
+			
+			registerReceiver(br, filter);
 			Log.i("Wisigoth onStop","ajout point "+p.getPoint().getLatitude()+" "+p.getPoint().getLongitude()+" trigger"+p.getTriggering());
 
 		}
@@ -150,7 +152,6 @@ public class MyMapActivity extends MapActivity implements LocationListener {
 	@Override
 	public void onLocationChanged(Location arg0) {
 		// TODO Auto-generated method stub
-		Toast.makeText(this, "DEBUT", Toast.LENGTH_SHORT).show();
 		maPosition.setPoint(new GeoPoint(arg0.getLatitude(), arg0
 				.getLongitude()));
 		mapView.redrawTiles();
@@ -177,7 +178,6 @@ public class MyMapActivity extends MapActivity implements LocationListener {
 				// Start the point of interest 's view
 				Intent intent = new Intent(this,WebviewActivity.class);
 				Bundle b = new Bundle();
-
 				b.putString("url", ((Poi)p).getExternURL());
 				intent.putExtras(b);
 				this.startActivity(intent);

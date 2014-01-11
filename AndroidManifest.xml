@@ -39,11 +39,7 @@
             android:label="@string/title_activity_webview" >
         </activity>
 
-        <receiver
-            android:name=".MapService"
-            android:enabled="true"
-            android:exported="false" >
-        </receiver>
+     
     </application>
 
 </manifest>

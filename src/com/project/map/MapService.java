@@ -32,6 +32,7 @@ public class MapService extends BroadcastReceiver {
 
 		Intent notificationIntent = new Intent(context, WebviewActivity.class);
 		PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, notificationIntent, 0);
+		Log.d(getClass().getSimpleName(), "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
 		Notification notification = createNotification();
 		notification.setLatestEventInfo(context, "Wisigoth Proximity Alert!", "You are near your point of interest.", pendingIntent);
 
