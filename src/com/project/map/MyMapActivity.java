@@ -112,33 +112,45 @@ public class MyMapActivity extends MapActivity implements LocationListener {
 		MyItemizedOverlay itemizedoverlayMaPosition = new MyItemizedOverlay(
 				drawableMaPos, this);
 
-
-		
-		
-		
 		Intent mIntent = new Intent("com.project.ProximityAlert");
 		double lat = listePoi.get(0).getPoint().getLatitude();
 		double lon = listePoi.get(0).getPoint().getLongitude();
-
-		PendingIntent pIntent = PendingIntent.getBroadcast(getApplicationContext(), 0, mIntent, 0);
+		mIntent.putExtra("name", listePoi.get(0).getTitle());
+		PendingIntent pIntent = PendingIntent.getBroadcast(getApplicationContext(), 0, mIntent, PendingIntent.FLAG_UPDATE_CURRENT);
 
 		locationManager.addProximityAlert(lat, lon, 100, -1, pIntent);
 
 		IntentFilter filter = new IntentFilter("com.project.ProximityAlert"); 
 		registerReceiver(new MapService(), filter);
 		Log.i("Wisigoth onStop","ajout point "+listePoi.get(0).getTitle());
-		
-		
-		
-		
-		
-		
+
+		mIntent = new Intent("com.project.ProximityAlert");
+		lat = listePoi.get(1).getPoint().getLatitude();
+		lon = listePoi.get(1).getPoint().getLongitude();
+		mIntent.putExtra("name", listePoi.get(1).getTitle());
+		pIntent = PendingIntent.getBroadcast(getApplicationContext(), 0, mIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+
+		locationManager.addProximityAlert(lat, lon, 100, -1, pIntent);
+
+		filter = new IntentFilter("com.project.ProximityAlert"); 
+		registerReceiver(new MapService(), filter);
+		Log.i("Wisigoth onStop","ajout point "+listePoi.get(1).getTitle());
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 		for (Poi p : listePoi) {
 			itemizedoverlayPoi.addOverlay(p);
-
-			
-
-
 		}
 		itemizedoverlayMaPosition.addOverlay(maPosition);
 
