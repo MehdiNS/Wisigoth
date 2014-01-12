@@ -32,12 +32,11 @@ public class MapService extends BroadcastReceiver {
 		}
 		NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
 
-		Intent notificationIntent = new Intent(context, WebviewActivity.class);
+		Intent notificationIntent = new Intent(context, MyMapActivity.class);
 		PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, notificationIntent, 0);
-		Log.d(getClass().getSimpleName(), "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
 		Notification notification = createNotification();
 		
-		notification.setLatestEventInfo(context, "Wisigoth", "Point d'intérêt à proximité : "+intent.getExtras().getString("name"), pendingIntent);
+		notification.setLatestEventInfo(context, "Wisigoth", "Point d'intÔøΩrÔøΩt ÔøΩ proximitÔøΩ : "+intent.getExtras().getString("name"), pendingIntent);
 
 		notificationManager.notify(NOTIFICATION_ID, notification);
 	}

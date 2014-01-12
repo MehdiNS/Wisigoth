@@ -12,7 +12,6 @@ import org.mapsforge.map.reader.header.FileOpenResult;
 import com.project.parser.TestParsing;
 import com.project.wisigoth.R;
 
-
 import android.app.PendingIntent;
 import android.content.Intent;
 import android.content.IntentFilter;
@@ -43,6 +42,7 @@ public class MyMapActivity extends MapActivity implements LocationListener {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		Toast.makeText(this, "CREATE", Toast.LENGTH_SHORT).show();
 
 		TestParsing t = new TestParsing();
 		listePoi = t.test(this);
@@ -67,14 +67,18 @@ public class MyMapActivity extends MapActivity implements LocationListener {
 		// Define a listener that responds to location updates
 
 		// getting GPS status
-		boolean isGPSEnabled = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
+		boolean isGPSEnabled = locationManager
+				.isProviderEnabled(LocationManager.GPS_PROVIDER);
 
 		// check if GPS enabled
 		if (isGPSEnabled) {
-			Location location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+			Location location = locationManager
+					.getLastKnownLocation(LocationManager.GPS_PROVIDER);
 			if (location != null) {
 				try {
-					maPosition.setPoint(new GeoPoint((int) (location.getLatitude() * 1E6), (int) (location.getLongitude() * 1E6)));
+					maPosition.setPoint(new GeoPoint((int) (location
+							.getLatitude() * 1E6), (int) (location
+							.getLongitude() * 1E6)));
 					provider = LocationManager.GPS_PROVIDER;
 				} catch (Exception e) {
 
@@ -92,7 +96,7 @@ public class MyMapActivity extends MapActivity implements LocationListener {
 					try {
 						maPosition.setPoint(new GeoPoint((int) (location
 								.getLatitude() * 1E6), (int) (location
-										.getLongitude() * 1E6)));
+								.getLongitude() * 1E6)));
 						provider = LocationManager.NETWORK_PROVIDER;
 					} catch (Exception e) {
 
@@ -112,56 +116,41 @@ public class MyMapActivity extends MapActivity implements LocationListener {
 		MyItemizedOverlay itemizedoverlayMaPosition = new MyItemizedOverlay(
 				drawableMaPos, this);
 
-		Intent mIntent = new Intent("com.project.ProximityAlert");
-		double lat = listePoi.get(0).getPoint().getLatitude();
-		double lon = listePoi.get(0).getPoint().getLongitude();
-		mIntent.putExtra("name", listePoi.get(0).getTitle());
-		PendingIntent pIntent = PendingIntent.getBroadcast(getApplicationContext(), 0, mIntent, PendingIntent.FLAG_UPDATE_CURRENT);
-
-		locationManager.addProximityAlert(lat, lon, 100, -1, pIntent);
-
-		IntentFilter filter = new IntentFilter("com.project.ProximityAlert"); 
-		registerReceiver(new MapService(), filter);
-		Log.i("Wisigoth onStop","ajout point "+listePoi.get(0).getTitle());
-
-		mIntent = new Intent("com.project.ProximityAlert");
-		lat = listePoi.get(1).getPoint().getLatitude();
-		lon = listePoi.get(1).getPoint().getLongitude();
-		mIntent.putExtra("name", listePoi.get(1).getTitle());
-		pIntent = PendingIntent.getBroadcast(getApplicationContext(), 0, mIntent, PendingIntent.FLAG_UPDATE_CURRENT);
-
-		locationManager.addProximityAlert(lat, lon, 100, -1, pIntent);
-
-		filter = new IntentFilter("com.project.ProximityAlert"); 
-		registerReceiver(new MapService(), filter);
-		Log.i("Wisigoth onStop","ajout point "+listePoi.get(1).getTitle());
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+		MapService m = new MapService();
+		Intent mIntent;
+		double lat;
+		double lon;
+		IntentFilter filter;
+		
 		for (Poi p : listePoi) {
+			mIntent = new Intent("com.project.ProximityAlert." + p.getTitle());
+			lat = p.getPoint().getLatitude();
+			lon = p.getPoint().getLongitude();
+			mIntent.putExtra("name", p.getTitle());
+			PendingIntent pIntent = PendingIntent.getBroadcast(
+					getApplicationContext(), 0, mIntent,
+					PendingIntent.FLAG_UPDATE_CURRENT);
+			locationManager.addProximityAlert(lat, lon, p.getTriggering(), -1, pIntent);
+			filter = new IntentFilter("com.project.ProximityAlert."
+					+ p.getTitle());
+			registerReceiver(m, filter);
+			Log.i("Wisigoth onStop", "ajout point " + p.getTitle());
 			itemizedoverlayPoi.addOverlay(p);
 		}
 		itemizedoverlayMaPosition.addOverlay(maPosition);
 
-		mapOverlays.add(itemizedoverlayMaPosition);
 		mapOverlays.add(itemizedoverlayPoi);
+		mapOverlays.add(itemizedoverlayMaPosition);
+		
 	}
 
 	protected void onResume() {
+		Toast.makeText(this, "RESUME", Toast.LENGTH_SHORT).show();
 		super.onResume();
-		locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER,2000, 20, this);
-		locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 2000, 20, this);
+		locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER,
+				2000, 20, this);
+		locationManager.requestLocationUpdates(
+				LocationManager.NETWORK_PROVIDER, 2000, 20, this);
 	}
 
 	@Override
@@ -178,38 +167,34 @@ public class MyMapActivity extends MapActivity implements LocationListener {
 				.getLongitude()));
 		mapView.redrawTiles();
 
-
-		double lat1,lat2;
-		double long1,long2;
-		Location l1,l2;
+		double lat1, lat2;
+		double long1, long2;
+		Location l1, l2;
 		lat1 = maPosition.getPoint().getLatitude();
 		long1 = maPosition.getPoint().getLongitude();
 		l1 = new Location("me");
 		l1.setLatitude(lat1);
 		l1.setLongitude(long1);
 		// Look if any Point of Interest matches with the current position
-		for(Poi p : listePoi) {
+		for (Poi p : listePoi) {
 			lat2 = p.getPoint().getLatitude();
 			long2 = p.getPoint().getLongitude();
 			l2 = new Location("poi");
 			l2.setLatitude(lat2);
 			l2.setLongitude(long2);
 
-			if((l1.distanceTo(l2) <= p.getTriggering()) && (p!=lastOpenedPoi)) {
+			if ((l1.distanceTo(l2) <= p.getTriggering())
+					&& (p != lastOpenedPoi)) {
 				lastOpenedPoi = p;
 				// Start the point of interest 's view
-				Intent intent = new Intent(this,WebviewActivity.class);
+				Intent intent = new Intent(this, WebviewActivity.class);
 				Bundle b = new Bundle();
-				b.putString("url", ((Poi)p).getExternURL());
+				b.putString("url", ((Poi) p).getExternURL());
 				intent.putExtras(b);
 				this.startActivity(intent);
 
 			}
-
 		}
-
-
-
 	}
 
 	public void onProviderDisabled(String provider) {
