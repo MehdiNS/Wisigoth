@@ -117,14 +117,24 @@ public class MyMapActivity extends MapActivity implements LocationListener {
 		Intent mIntent = new Intent("com.project.ProximityAlert");
 		double lat = listePoi.get(0).getPoint().getLatitude();
 		double lon = listePoi.get(0).getPoint().getLongitude();
-
-		PendingIntent pIntent = PendingIntent.getBroadcast(getApplicationContext(), 0, mIntent, 0);
+		mIntent.putExtra("name", listePoi.get(0).getTitle());
+		PendingIntent pIntent = PendingIntent.getBroadcast(getApplicationContext(), 0, mIntent, PendingIntent.FLAG_UPDATE_CURRENT);
 
 		locationManager.addProximityAlert(lat, lon, 100, -1, pIntent);
 
 		IntentFilter filter = new IntentFilter("com.project.ProximityAlert"); 
 		registerReceiver(new MapService(), filter);
 		Log.i("Wisigoth onStop","ajout point "+listePoi.get(0).getTitle());
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 		
 		
 		
