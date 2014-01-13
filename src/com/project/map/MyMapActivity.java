@@ -27,8 +27,6 @@ import android.widget.Toast;
 
 public class MyMapActivity extends MapActivity implements LocationListener {
 
-	private static final File MAP_FILE = new File(Environment
-			.getExternalStorageDirectory().getPath(), "grenoble.mp3");
 	public static Point maPosition = new Point(new GeoPoint(0, 0),
 			"Ma position", "");
 	private List<Poi> listePoi;
@@ -52,6 +50,8 @@ public class MyMapActivity extends MapActivity implements LocationListener {
 		mapView.setBuiltInZoomControls(true);
 		mapView.getController().setZoom(16);
 
+		File MAP_FILE = new File(Environment.getExternalStorageDirectory()
+				.getPath(), "grenoble.map");
 		FileOpenResult fileOpenResult = mapView.setMapFile(MAP_FILE);
 
 		if (!fileOpenResult.isSuccess()) {
@@ -121,7 +121,7 @@ public class MyMapActivity extends MapActivity implements LocationListener {
 		double lat;
 		double lon;
 		IntentFilter filter;
-		
+
 		for (Poi p : listePoi) {
 			mIntent = new Intent("com.project.ProximityAlert." + p.getTitle());
 			lat = p.getPoint().getLatitude();
@@ -130,7 +130,8 @@ public class MyMapActivity extends MapActivity implements LocationListener {
 			PendingIntent pIntent = PendingIntent.getBroadcast(
 					getApplicationContext(), 0, mIntent,
 					PendingIntent.FLAG_UPDATE_CURRENT);
-			locationManager.addProximityAlert(lat, lon, p.getTriggering(), -1, pIntent);
+			locationManager.addProximityAlert(lat, lon, p.getTriggering(), -1,
+					pIntent);
 			filter = new IntentFilter("com.project.ProximityAlert."
 					+ p.getTitle());
 			registerReceiver(m, filter);
@@ -141,7 +142,7 @@ public class MyMapActivity extends MapActivity implements LocationListener {
 
 		mapOverlays.add(itemizedoverlayPoi);
 		mapOverlays.add(itemizedoverlayMaPosition);
-		
+
 	}
 
 	protected void onResume() {
